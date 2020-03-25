@@ -1,0 +1,7 @@
+aiohttp
+pyyaml
+pip-tools
+
+discord.py
+oauth2client
+google-api-python-client
