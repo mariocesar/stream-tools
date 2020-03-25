@@ -1,12 +1,8 @@
-
 credentials:
   discord:
     client: 692484003428564994
     secret: n28mEv-SqBExsqThSNZEDVEgQ3pKRGrH
     token: NjkyNDg0MDAzNDI4NTY0OTk0.XnvOPw.GKaEFbORz8l4_PhOfCQT8-aP3fc
-
-  youtube:
-    apikey: AIzaSyDn8ykB0Uc1bFTG7cyMXHAtUgt03nYQiIs
 
 sources:
   discord:
