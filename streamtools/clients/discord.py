@@ -1,5 +1,5 @@
 import discord
-from base import ChatMessage
+from streamtools.base import ChatMessage
 
 
 class Client(discord.Client):

@@ -7,14 +7,10 @@ from oauth2client.client import flow_from_clientsecrets
 from oauth2client.file import Storage
 from oauth2client.tools import run_flow
 
-from base import ChatMessage
+from streamtools.base import ChatMessage
+from streamtools.utils import fetch
 
 API_MESSAGES = "https://www.googleapis.com/youtube/v3/liveChat/messages"
-
-
-async def fetch(session, url):
-    async with session.get(url) as response:
-        return await response.json()
 
 
 async def messages():
