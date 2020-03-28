@@ -2,7 +2,15 @@
 
 Collect chat messages and events from different sources.
 
+Chat Relay
+
 - [ ] Youtube Live Chat
 - [x] Discord Channel
-- [ ] Twitch Live chat
-- [ ] Facebook Live chat
+- [x] Twitch Live chat
+- [ ] Facebook Live chat ?
+
+Multistream
+
+- [ ] Youtube Live
+- [ ] Twitch
+- [ ] Facebook ?
