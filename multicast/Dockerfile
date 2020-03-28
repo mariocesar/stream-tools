@@ -8,4 +8,4 @@ RUN set -eux \
         libnginx-mod-http-lua \
     && rm -r /var/cache/apt
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx"]
