@@ -25,6 +25,10 @@ class Client(discord.Client):
             )
 
 
+def login():
+    ...
+
+
 async def start(queue, config):
     client = Client(queue, config)
 
