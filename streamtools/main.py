@@ -3,7 +3,7 @@ import sys
 from asyncio import Queue
 from pathlib import Path
 
-from streamtools.clients import discord, twitch, youtube
+from streamtools.clients import discordc, twitch, youtube
 from streamtools.utils import loadconfig
 
 BASEDIR = Path(__file__).parent.resolve()
@@ -22,7 +22,7 @@ async def process_queue():
 
 async def run_discord():
     print("Discord starting")
-    await discord.start(queue, config)
+    await discordc.start(queue, config)
 
 
 async def run_twitch():

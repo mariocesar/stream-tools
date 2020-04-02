@@ -10,7 +10,7 @@ from streamtools.utils import loadconfig
 from twitchio import Message
 from twitchio.ext import commands
 
-secrets_file = Path(__file__).parent.parent.parent / "twitch_secrets.json"
+secrets_file = Path(__file__).parent.parent.parent / "twitch-secrets.json"
 
 
 class Bot(commands.Bot):
@@ -36,7 +36,7 @@ class Bot(commands.Bot):
         print(f"Message | {message}")
 
         await self.queue.put(
-            ChatMessage("twitch", message.author.display_name, message.clean_content)
+            ChatMessage("twitch", message.author.display_name, message.content)
         )
 
         await self.handle_commands(message)
@@ -52,6 +52,7 @@ def login():
             "scope": "chat:read channel:moderate chat:edit",
         }
     )
+
     webbrowser.open(f"https://id.twitch.tv/oauth2/authorize?{queryparams}")
 
     async def handle(request):
@@ -95,5 +96,4 @@ async def start(queue, config):
 
 
 if __name__ == "__main__":
-    bot = Bot()
-    bot.run()
+    login()

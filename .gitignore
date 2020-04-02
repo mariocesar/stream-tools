@@ -132,5 +132,6 @@ dmypy.json
 
 config.yml
 **/*secrets.json
+**/*accesstoken.json
 
 .vscode
