@@ -4,13 +4,19 @@ Collect chat messages and events from different sources.
 
 Chat Relay
 
-- [ ] Youtube Live Chat
+- [x] Youtube Live Chat
 - [x] Discord Channel
 - [x] Twitch Live chat
 - [ ] Facebook Live chat ?
 
 Multistream
 
-- [ ] Youtube Live
-- [ ] Twitch
+- [x] Youtube Live
+- [x] Twitch
 - [ ] Facebook ?
+
+Web Chat
+
+- Aiohttp
+- Websockets
+- Vue.js

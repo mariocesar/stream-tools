@@ -134,4 +134,6 @@ config.yml
 **/*secrets.json
 **/*accesstoken.json
 
+node_modules
+
 .vscode

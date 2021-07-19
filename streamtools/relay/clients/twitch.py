@@ -5,12 +5,12 @@ from urllib.parse import urlencode
 
 from aiohttp import client, web
 from aiohttp.web_runner import GracefulExit
-from streamtools.base import ChatMessage
+from streamtools.base import ChatEvent, EventType
 from streamtools.utils import loadconfig
 from twitchio import Message
 from twitchio.ext import commands
 
-secrets_file = Path(__file__).parent.parent.parent / "twitch-secrets.json"
+secrets_file = Path(__file__).parent.parent.parent.parent / "twitch-secrets.json"
 
 
 class Bot(commands.Bot):
@@ -27,16 +27,25 @@ class Bot(commands.Bot):
         )
 
     async def event_pubsub(self, data):
-        print(f"Event {data}")
+        ...
 
     async def event_ready(self):
-        print(f"Ready | {self.nick}")
+        await self.queue.put(
+            ChatEvent(
+                type=EventType.READY,
+                source="twitch",
+            )
+        )
 
     async def event_message(self, message: Message):
-        print(f"Message | {message}")
-
         await self.queue.put(
-            ChatMessage("twitch", message.author.display_name, message.content)
+            ChatEvent(
+                type=EventType.MESSAGE,
+                source="twitch",
+                author=message.author.display_name,
+                content=message.content,
+
+            )
         )
 
         await self.handle_commands(message)

@@ -10,21 +10,14 @@ from googleapiclient.discovery import build
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.file import Storage
 from oauth2client.tools import run_flow
-from streamtools.base import ChatMessage
-from streamtools.utils import fetch, loadconfig
+from streamtools.base import ChatEvent, EventType
+from streamtools.utils import fetch
 
 API_MESSAGES = "https://www.googleapis.com/youtube/v3/liveChat/messages"
 
 
-async def messages():
-    async with aiohttp.ClientSession() as session:
-        while True:
-            response = await fetch(session, API_MESSAGES)
-
-
 @lru_cache()
 def get_access_token():
-    print("Hit ! get_access_token")
     return json.loads(Path("youtube-accesstoken.json").read_text())["access_token"]
 
 
@@ -45,8 +38,6 @@ async def start(queue, config):
         )
         live_chatid = data["items"][0]["snippet"]["liveChatId"]
 
-        print("Live Chat ID", live_chatid)
-
         async def live_chat_messages(token=None):
             return await fetch(
                 session,
@@ -63,6 +54,8 @@ async def start(queue, config):
                 },
             )
 
+        await queue.put(ChatEvent(type=EventType.READY, source="youtube",))
+
         page = None
 
         while True:
@@ -72,7 +65,8 @@ async def start(queue, config):
             for message in data["items"]:
                 if message["kind"] == "youtube#liveChatMessage":
                     await queue.put(
-                        ChatMessage(
+                        ChatEvent(
+                            type=EventType.MESSAGE,
                             source="youtube",
                             author=message["authorDetails"]["displayName"],
                             content=message["snippet"]["displayMessage"],
